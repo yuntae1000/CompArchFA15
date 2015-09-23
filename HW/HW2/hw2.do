@@ -1,4 +1,4 @@
-vlog -reportprogress 300 -work work multiplexer.v decoder.v adder.v
+vlog -reportprogress 300 -work work decoder.v 
 vsim -voptargs="+acc" testDecoder
 add wave -position insertpoint  \
 sim:/testDecoder/addr0 \
