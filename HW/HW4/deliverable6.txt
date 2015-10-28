@@ -1,0 +1,7 @@
+Deliverable 6
+
+The decoder module uses shift register to make decoded lines.
+If the enable is 1, the enable is shifted left according to the number of the address.
+For example if the address is 5'b0000 the decoded output becomes 32'd1 and if the address is
+5'b00001 the output becomes 32'd2 , 5'b00010 the output becomes 32'd4.
+Like this the module makes the decoded output.
