@@ -1,6 +1,7 @@
 vlog -reportprogress 300 -work work regfile.t.v
 vsim -voptargs="+acc" hw4testbenchharness
 
+
 add wave -position insertpoint  \
 sim:/hw4testbenchharness/ReadData1 \
 sim:/hw4testbenchharness/ReadData2 \

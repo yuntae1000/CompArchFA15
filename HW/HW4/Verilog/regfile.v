@@ -26,7 +26,7 @@ wire[31:0]	registeroutput1,registeroutput2,registeroutput3,registeroutput4,regis
 
 
 	// decoder Regwrite can be changed to something as which can enable decoder
-	decoders1to32 Decoder(decodedline,RegWrite,WriteData);
+	decoder1to32 Decoder(decodedline,RegWrite,WriteRegister);
 	// register with 0 output
 	register32zero RegisterZero(registeroutput0, WriteData, RegWrite, Clk);
 
@@ -65,14 +65,13 @@ wire[31:0]	registeroutput1,registeroutput2,registeroutput3,registeroutput4,regis
 	
 	//Read MUX
 	mux32to1by32 Mux1(ReadData1, ReadRegister1, registeroutput0, registeroutput1,registeroutput2,registeroutput3,registeroutput4,registeroutput5,registeroutput6,registeroutput7,registeroutput8,registeroutput9,registeroutput10,registeroutput11,registeroutput12,registeroutput13,registeroutput14,registeroutput15,registeroutput16,registeroutput17,registeroutput18,registeroutput19,registeroutput20,registeroutput21,registeroutput22,registeroutput23,registeroutput24,registeroutput25,registeroutput26,registeroutput27,registeroutput28,registeroutput29,registeroutput30,registeroutput31);
-	muxreto1by32 Mux2(ReadData2, ReadRegister2, registeroutput0, registeroutput1,registeroutput2,registeroutput3,registeroutput4,registeroutput5,registeroutput6,registeroutput7,registeroutput8,registeroutput9,registeroutput10,registeroutput11,registeroutput12,registeroutput13,registeroutput14,registeroutput15,registeroutput16,registeroutput17,registeroutput18,registeroutput19,registeroutput20,registeroutput21,registeroutput22,registeroutput23,registeroutput24,registeroutput25,registeroutput26,registeroutput27,registeroutput28,registeroutput29,registeroutput30,registeroutput31);
+	mux32to1by32 Mux2(ReadData2, ReadRegister2, registeroutput0, registeroutput1,registeroutput2,registeroutput3,registeroutput4,registeroutput5,registeroutput6,registeroutput7,registeroutput8,registeroutput9,registeroutput10,registeroutput11,registeroutput12,registeroutput13,registeroutput14,registeroutput15,registeroutput16,registeroutput17,registeroutput18,registeroutput19,registeroutput20,registeroutput21,registeroutput22,registeroutput23,registeroutput24,registeroutput25,registeroutput26,registeroutput27,registeroutput28,registeroutput29,registeroutput30,registeroutput31);
 
 
     
   // These two lines are clearly wrong.  They are included to showcase how the 
   // test harness works. Delete them after you understand the testing process, 
   // and replace them with your actual code.
-  assign ReadData1 = 42;
-  assign ReadData2 = 42;
+  
 
 endmodule

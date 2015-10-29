@@ -122,6 +122,9 @@ output reg		Clk
     dutpassed = 0;	// Set to 'false' on failure
     $display("Test Case 1 Failed");
   end
+  else begin
+    $display("Test case 1 Passed");
+  end
 
   // Test Case 2: 
   //   Write '15' to register 2, verify with Read Ports 1 and 2
@@ -137,7 +140,84 @@ output reg		Clk
     dutpassed = 0;
     $display("Test Case 2 Failed");
   end
+  else begin
+    $display("Test case 2 Passed");
+  end
 
+
+  //Test case 3:
+  // Test for broken WriteEnable
+  WriteRegister = 5'd2;
+  WriteData = 32'd15;
+  RegWrite = 0;
+  ReadRegister1 = 5'd2;
+  ReadRegister2 = 5'd2;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 != 15) || (ReadData2 != 15)) begin
+    dutpassed = 0;
+    $display("Test Case 3(Broken write enable) Failed");
+  end
+  else begin
+    $display("Test case 3(Broken write enable) Passed");
+  end
+
+  //Test case 4:
+  // Test for broken Decoder
+  WriteRegister = 5'd2;
+  WriteData = 32'd150;
+  RegWrite = 0;
+  ReadRegister1 = 5'd2;
+  ReadRegister2 = 5'd10;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 != 150) || (ReadData2 != 150)) begin
+    dutpassed = 0;
+    $display("Test Case 4(Broken decoder) Failed");
+  end
+  else begin
+    $display("Test case 3(Broken decoder) Passed");
+  end
+
+  //Test case 5:
+  // Register zero
+  WriteRegister = 5'd0;
+  WriteData = 32'd1234;
+  RegWrite = 1;
+  ReadRegister1 = 5'd0;
+  ReadRegister2 = 5'd0;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 != 0) || (ReadData2 != 0)) begin
+    dutpassed = 0;
+    $display("Test Case 5(register zero) Failed");
+  end
+  else begin
+    $display("Test case 5(register zero) Passed");
+  end
+
+  //Test case 6:
+  // Test for Port2 is broken and always reads register17
+  WriteRegister=5'd17;
+  WriteData=32'd1;
+  RegWrite=1;
+
+  #5 Clk=1; #5 Clk=0;
+
+  WriteRegister = 5'd16;
+  WriteData = 32'd1111;
+  RegWrite = 1;
+  ReadRegister1 = 5'd17;
+  ReadRegister2 = 5'd16;
+  #5 Clk=1; #5 Clk=0;
+
+  if(ReadData1 != ReadData2)begin
+    dutpassed = 0;
+    $display("Test Case 6 Failed");
+  end
+  else begin
+    $display("Test case 6 Passed");
+  end
 
   // All done!  Wait a moment and signal test completion.
   #5
